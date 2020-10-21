@@ -5,10 +5,14 @@ import java.util.Random;
 			Random random = new Random();
                 	int upperbond = 2;
                 	int randomNumber = random.nextInt(upperbond);
+			int empRatePerHr = 20;
+                 	int empHr = 8;
                 	if(randomNumber == 1) {
-                        	System.out.println("Employee is present");
+                 		int Salary = empRatePerHr * empHr;
+			       	System.out.println("Employee Daily Check Salary = " + Salary);
                 	}else {
-                        	System.out.println("Employee is absent");
+				int Salary = 0;
+                        	System.out.println("Employee Daily Check Salary = "+ Salary);
                 	}
 		}
 	}
