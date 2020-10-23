@@ -1,6 +1,6 @@
 import java.util.Random;
-import java.util.Scanner;
-	public class EmployeeWage{
+import java.util.*;
+	public class EmployeeWage implements IComputeEmpWage{
 		//private final int NUMBER_WORKING_DAYS = 20, MAX_HRS_IN_MONTH = 100;
 		//int totalWorkingDays = 0,empRatePerHr = 20, empHr ,randomNumber,totalEmpHr,totalSalary;
 		/*
@@ -16,8 +16,12 @@ import java.util.Scanner;
    			this.numWorkingDays = numWorkingDays;
    			this.company = company;
  		}*/
-		private CompanyEmployeeDetails[] companyEmpWageArray = new CompanyEmployeeDetails[3];
+		//private CompanyEmployeeDetails[] companyEmpWageArray = new CompanyEmployeeDetails[3];
  		public int counter = 0;
+		public List<CompanyEmployeeDetails> companyEmpWageList;
+ 		public EmployeeWage() {
+   			companyEmpWageList = new LinkedList<>();
+ 		}
 		public int randomGeneration() {
   				Random random = new Random();
     				int upperbond = 3;
@@ -25,17 +29,22 @@ import java.util.Scanner;
     				return randomNumber;
  		}
 		public void addCompanyEmpWageDetails(int empRatePerHr,int maxHoursPerMonth,int numWorkingDays,String company) {
- 				companyEmpWageArray[counter]= new CompanyEmployeeDetails(empRatePerHr,maxHoursPerMonth,numWorkingDays,company);
-    				counter++;
+ 		//		companyEmpWageArray[counter]= new CompanyEmployeeDetails(empRatePerHr,maxHoursPerMonth,numWorkingDays,company);
+    		//		counter++;
+				 CompanyEmployeeDetails companyEmpWage = new CompanyEmployeeDetails(empRatePerHr,maxHoursPerMonth,numWorkingDays,company);               
+ 				 companyEmpWageList.add(companyEmpWage);
  		}
 		public void computeEmpWage() {
-  			for(int i=0;i<counter;i++) {
-    				companyEmpWageArray[i].setTotalWage(this.computeEmpWage(companyEmpWageArray[i]));
-    				System.out.println(companyEmpWageArray[i]);
+  			for(int i=0;i<companyEmpWageList.size();i++) {
+    		//		companyEmpWageArray[i].setTotalWage(this.computeEmpWage(companyEmpWageArray[i]));
+    		//		System.out.println(companyEmpWageArray[i]);
+				CompanyEmployeeDetails companyEmpWage = companyEmpWageList.get(i);
+  				companyEmpWage.setTotalWage(this.computeEmpWage(companyEmpWage));
+  				System.out.println(companyEmpWage);
   			}
  		}
 		public int computeEmpWage(CompanyEmployeeDetails companyEmpWage) {
-    				int empHr = 0,totalEmpHr = 0,totalWorkingDays = 0;
+    				int empHr = 0,totalEmpHr = 0,totalWorkingDays = 0,totalWage=0;
   			while (totalEmpHr < companyEmpWage.maxHoursPerMonth && totalWorkingDays < companyEmpWage.numWorkingDays) 
 			{
   				int randomNumber = randomGeneration();
@@ -52,8 +61,9 @@ import java.util.Scanner;
     				}
      				totalEmpHr = totalEmpHr + empHr;
     			}
-    			return totalEmpHr * companyEmpWage.empRatePerHr ;
- 		}
+    				totalWage = totalEmpHr * companyEmpWage.empRatePerHr ;
+ 				return totalWage;
+		}
 		/*
 		public String toString() {
  				 return "Total Emp Wage For Company : " + company + " "  +" is: " + totalEmpWage;
