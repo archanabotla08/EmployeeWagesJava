@@ -3,18 +3,27 @@ import java.util.Scanner;
 	public class EmployeeWage{
 		//private final int NUMBER_WORKING_DAYS = 20, MAX_HRS_IN_MONTH = 100;
 		//int totalWorkingDays = 0,empRatePerHr = 20, empHr ,randomNumber,totalEmpHr,totalSalary;
+		private final String company;
+ 		private final int empRatePerHr;
+ 		private final int numWorkingDays;
+ 		private final int maxHoursPerMonth;
+ 		private  int totalEmpWage = 0;
+
+		public EmployeeWage(int empRatePerHr,int maxHoursPerMonth,int numWorkingDays,String company) {
+  			this.empRatePerHr = empRatePerHr;
+   			this.maxHoursPerMonth = maxHoursPerMonth;
+   			this.numWorkingDays = numWorkingDays;
+   			this.company = company;
+ 		}
 		public int randomGeneration() {
   				Random random = new Random();
     				int upperbond = 3;
 				int randomNumber = random.nextInt(upperbond);
     				return randomNumber;
  		}
-		public void calculateEmpHr(String name,int MAX_HRS_IN_MONTH,int TOTAL_WORKING_DAYS) {
-			  	int max =  MAX_HRS_IN_MONTH;
-    			  	int Days = TOTAL_WORKING_DAYS;
-    			  	String companyName = name;
-    				int empRatePerHr =20,empHr=0,totalWorkingDays=0,totalSalary=0,totalEmpHr=0;
-  			while (totalEmpHr < MAX_HRS_IN_MONTH && totalWorkingDays < Days) 
+		public void computeEmpWage() {
+    				int empHr = 0,totalEmpHr = 0,totalWorkingDays = 0;
+  			while (totalEmpHr < maxHoursPerMonth && totalWorkingDays < numWorkingDays) 
 			{
   				int randomNumber = randomGeneration();
      				switch(randomNumber){
@@ -30,22 +39,18 @@ import java.util.Scanner;
     				}
      				totalEmpHr = totalEmpHr + empHr;
     			}
-    			totalSalary = totalEmpHr * empRatePerHr ;
-     			System.out.println("Employee name = "+companyName+" "+"Employee Salary = "+totalSalary);
+    			totalEmpWage = totalEmpHr * empRatePerHr ;
  		}
+		public String toString() {
+ 				 return "Total Emp Wage For Company : " + company + " "  +" is: " + totalEmpWage;
+		}
 		public static void main(String[] args){
-			EmployeeWage emp = new EmployeeWage();
-                	Scanner sc =  new Scanner(System.in);
-                	System.out.println("Enter the number of company's");
-                	int companyNumber = sc.nextInt();
-                	for(int i=1;i<=companyNumber;i++){
-                	System.out.println("Enter the company's name");
-                 	String name = sc.next();
-                	System.out.println("Enter the MAX_HRS_IN_MONTH");
-                	int MAX_HRS_IN_MONTH = sc.nextInt();
-                	System.out.println("Enter the working days");
-                	int TOTAL_WORKING_DAYS = sc.nextInt();
-                	emp.calculateEmpHr(name,MAX_HRS_IN_MONTH,TOTAL_WORKING_DAYS);
-			}
+			EmployeeWage object_1 = new EmployeeWage(20,100,20,"jio");
+  			EmployeeWage object_2 = new EmployeeWage(10,50,20,"reliance");
+  			object_1.computeEmpWage();
+  			System.out.println(object_1);
+  			object_2.computeEmpWage();
+  			System.out.println(object_2);
 		}
 	}
+
