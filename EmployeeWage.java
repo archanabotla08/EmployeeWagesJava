@@ -3,8 +3,10 @@ import java.util.*;
 	public class EmployeeWage implements IComputeEmpWage{
  		public int counter = 0;
 		public List<CompanyEmployeeDetails> companyEmpWageList;
+		public Map<String,CompanyEmployeeDetails> companyEmpWageMap;
  		public EmployeeWage() {
    			companyEmpWageList = new ArrayList<>();
+			companyEmpWageMap = new HashMap<>();
  		}
 		public int randomGeneration() {
   				Random random = new Random();
@@ -17,6 +19,7 @@ import java.util.*;
     		//		counter++;
 				 CompanyEmployeeDetails companyEmpWage = new CompanyEmployeeDetails(empRatePerHr,maxHoursPerMonth,numWorkingDays,company);               
  				 companyEmpWageList.add(companyEmpWage);
+				companyEmpWageMap.put(company,companyEmpWage);
  		}
 		public void computeEmpWage() {
   			for(int i=0;i<companyEmpWageList.size();i++) {
@@ -27,6 +30,9 @@ import java.util.*;
   				System.out.println(companyEmpWage);
   			}
  		}
+		public int getTotalWage(String company){
+			return companyEmpWageMap.get(company).totalEmpWage;
+		}
 		public int computeEmpWage(CompanyEmployeeDetails companyEmpWage) {
     				int empHr = 0,totalEmpHr = 0,totalWorkingDays = 0,totalWage=0,dailyWage = 0;
   			while (totalEmpHr < companyEmpWage.maxHoursPerMonth && totalWorkingDays < companyEmpWage.numWorkingDays) 
@@ -43,8 +49,6 @@ import java.util.*;
         				empHr =0;
         			break;
     				}
-				dailyWage = empHr * companyEmpWage.empRatePerHr;
-				System.out.println("daily Wage For Company : " + dailyWage);
      				totalEmpHr = totalEmpHr + empHr;
     			}
     				totalWage = totalEmpHr * companyEmpWage.empRatePerHr ;
@@ -60,6 +64,7 @@ import java.util.*;
 			emp.addCompanyEmpWageDetails(20,100,20,"jio");
   			emp.addCompanyEmpWageDetails(10,80,10,"reliance");
   			emp.computeEmpWage();
+			System.out.println("Total Wage for company : " + emp.getTotalWage("jio"));
 		}
 	}
 
