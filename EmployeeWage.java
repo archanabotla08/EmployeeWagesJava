@@ -28,7 +28,7 @@ import java.util.*;
   			}
  		}
 		public int computeEmpWage(CompanyEmployeeDetails companyEmpWage) {
-    				int empHr = 0,totalEmpHr = 0,totalWorkingDays = 0,totalWage=0;
+    				int empHr = 0,totalEmpHr = 0,totalWorkingDays = 0,totalWage=0,dailyWage = 0;
   			while (totalEmpHr < companyEmpWage.maxHoursPerMonth && totalWorkingDays < companyEmpWage.numWorkingDays) 
 			{
   				int randomNumber = randomGeneration();
@@ -43,6 +43,8 @@ import java.util.*;
         				empHr =0;
         			break;
     				}
+				dailyWage = empHr * companyEmpWage.empRatePerHr;
+				System.out.println("daily Wage For Company : " + dailyWage);
      				totalEmpHr = totalEmpHr + empHr;
     			}
     				totalWage = totalEmpHr * companyEmpWage.empRatePerHr ;
