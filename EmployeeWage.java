@@ -1,26 +1,10 @@
 import java.util.Random;
 import java.util.*;
 	public class EmployeeWage implements IComputeEmpWage{
-		//private final int NUMBER_WORKING_DAYS = 20, MAX_HRS_IN_MONTH = 100;
-		//int totalWorkingDays = 0,empRatePerHr = 20, empHr ,randomNumber,totalEmpHr,totalSalary;
-		/*
-		private final String company;
- 		private final int empRatePerHr;
- 		private final int numWorkingDays;
- 		private final int maxHoursPerMonth;
- 		private  int totalEmpWage = 0;
-
-		public EmployeeWage(int empRatePerHr,int maxHoursPerMonth,int numWorkingDays,String company) {
-  			this.empRatePerHr = empRatePerHr;
-   			this.maxHoursPerMonth = maxHoursPerMonth;
-   			this.numWorkingDays = numWorkingDays;
-   			this.company = company;
- 		}*/
-		//private CompanyEmployeeDetails[] companyEmpWageArray = new CompanyEmployeeDetails[3];
  		public int counter = 0;
 		public List<CompanyEmployeeDetails> companyEmpWageList;
  		public EmployeeWage() {
-   			companyEmpWageList = new LinkedList<>();
+   			companyEmpWageList = new ArrayList<>();
  		}
 		public int randomGeneration() {
   				Random random = new Random();
